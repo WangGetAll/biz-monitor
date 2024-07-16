@@ -1,16 +1,16 @@
 server:
   port: 8091
 
-business:
-  behavior:
-    monitor:
-      config:
-        # 状态；true = 开启、false 关闭
-        enabled: true
-        # redis host
-        host: 127.0.0.1
-        # redis port
-        port: 16379
+#business:
+#  behavior:
+#    monitor:
+#      config:
+#        # 状态；true = 开启、false 关闭
+#        enabled: true
+#        # redis host
+#        host: 47.113.216.8
+#        # redis port
+#        port: 6379
 
 logging:
   level:

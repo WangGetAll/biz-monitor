@@ -1,4 +1,4 @@
-package com.wjy.monitor;
+package cn.bugstack;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
