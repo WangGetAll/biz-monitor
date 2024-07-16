@@ -45,7 +45,6 @@ public class RedisPush implements IPush {
 
         RTopic topic = this.redissonClient.getTopic(topicStr);
         topic.addListener(LogMessage.class, new Listener());
-        logger.info("Subscribed to topic: " + topicStr);
     }
 
     /**
@@ -55,7 +54,6 @@ public class RedisPush implements IPush {
         // 监听者监听到消息，打印
         @Override
         public void onMessage(CharSequence charSequence, LogMessage logMessage) {
-            System.out.println("接收到消息了~");
             logger.info("接收消息：{}", JSON.toJSONString(logMessage));
         }
     }
@@ -68,9 +66,7 @@ public class RedisPush implements IPush {
     public void send(LogMessage logMessage) {
         try {
             RTopic topic = redissonClient.getTopic(topicStr);
-            redissonClient.getBucket("a").set("b");
             long publish = topic.publish(logMessage);
-            System.out.println("Published count: " + publish);
         } catch (Exception e) {
             logger.error("警告: 业务行为监控组件，推送日志消息失败", e);
         }
