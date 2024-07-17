@@ -2,6 +2,7 @@ package com.wjy.monitor.domain.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wjy.monitor.domain.entity.MonitorDataEntity;
+import com.wjy.monitor.domain.entity.MonitorDataMapEntity;
 import com.wjy.monitor.domain.repository.IMonitorRepository;
 import com.wjy.monitor.domain.valobj.GatherNodeExpressionVO;
 import com.wjy.monitor.types.Constants;
@@ -87,5 +88,15 @@ public class LogAnalyticalService implements ILogAnalyticalService {
         }
 
     }
+
+    /**
+     * 查map表，得到所有的监控id、监控name
+     * @return
+     */
+    @Override
+    public List<MonitorDataMapEntity> queryMonitorDataMapEntityList() {
+        return repository.queryMonitorDataMapEntityList();
+    }
+
 
 }

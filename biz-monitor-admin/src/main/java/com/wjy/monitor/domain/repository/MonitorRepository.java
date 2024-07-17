@@ -1,9 +1,11 @@
 package com.wjy.monitor.domain.repository;
 
 import com.wjy.monitor.domain.entity.MonitorDataEntity;
+import com.wjy.monitor.domain.entity.MonitorDataMapEntity;
 import com.wjy.monitor.domain.valobj.GatherNodeExpressionVO;
 import com.wjy.monitor.infrastructure.dao.*;
 import com.wjy.monitor.infrastructure.po.MonitorData;
+import com.wjy.monitor.infrastructure.po.MonitorDataMap;
 import com.wjy.monitor.infrastructure.po.MonitorDataMapNode;
 import com.wjy.monitor.infrastructure.po.MonitorDataMapNodeField;
 import com.wjy.monitor.infrastructure.redis.IRedisService;
@@ -95,6 +97,10 @@ public class MonitorRepository implements IMonitorRepository {
         return monitorDataMapDao.queryMonitorNameByMonitoryId(monitorId);
     }
 
+    /**
+     * 保存监控数据
+     * @param monitorDataEntity
+     */
     @Override
     public void saveMonitoryData(MonitorDataEntity monitorDataEntity) {
         MonitorData monitorDataReq = new MonitorData();
@@ -112,6 +118,23 @@ public class MonitorRepository implements IMonitorRepository {
 
         String cacheKey = Constants.RedisKey.monitor_node_data_count_key + monitorDataEntity.getMonitorId() + Constants.UNDERLINE + monitorDataEntity.getMonitorNodeId();
         redisService.incr(cacheKey);
+    }
+
+    /**
+     * 查map表，得到所有的监控id、监控name
+     * @return
+     */
+    @Override
+    public List<MonitorDataMapEntity> queryMonitorDataMapEntityList() {
+        List<MonitorDataMap> monitorDataList = monitorDataMapDao.queryMonitorDataMapEntityList();
+        List<MonitorDataMapEntity> monitorDataMapEntities = new ArrayList<>();
+        for (MonitorDataMap monitorDataMap : monitorDataList) {
+            monitorDataMapEntities.add(MonitorDataMapEntity.builder()
+                    .monitorId(monitorDataMap.getMonitorId())
+                    .monitorName(monitorDataMap.getMonitorName())
+                    .build());
+        }
+        return monitorDataMapEntities;
     }
 
 }

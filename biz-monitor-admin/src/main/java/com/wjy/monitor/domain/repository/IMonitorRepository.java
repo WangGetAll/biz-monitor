@@ -2,6 +2,7 @@ package com.wjy.monitor.domain.repository;
 
 
 import com.wjy.monitor.domain.entity.MonitorDataEntity;
+import com.wjy.monitor.domain.entity.MonitorDataMapEntity;
 import com.wjy.monitor.domain.valobj.GatherNodeExpressionVO;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface IMonitorRepository {
 
 
     void saveMonitoryData(MonitorDataEntity monitorDataEntity);
+
+    List<MonitorDataMapEntity> queryMonitorDataMapEntityList();
 
 }
