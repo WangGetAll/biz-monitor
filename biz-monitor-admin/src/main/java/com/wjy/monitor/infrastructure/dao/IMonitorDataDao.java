@@ -10,4 +10,9 @@ public interface IMonitorDataDao {
 
     List<MonitorData> queryMonitorDataList(MonitorData monitorDataReq);
 
+    /**
+     * data表，新增记录
+     * @param monitorDataReq
+     */
+    void insert(MonitorData monitorDataReq);
 }

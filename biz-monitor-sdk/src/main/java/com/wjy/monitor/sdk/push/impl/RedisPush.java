@@ -1,12 +1,10 @@
 package com.wjy.monitor.sdk.push.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.wjy.monitor.sdk.model.LogMessage;
 import com.wjy.monitor.sdk.push.IPush;
 import org.redisson.Redisson;
 import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
-import org.redisson.api.listener.MessageListener;
 import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 import org.slf4j.Logger;
@@ -41,22 +39,9 @@ public class RedisPush implements IPush {
                 .setPingConnectionInterval(0)
                 .setKeepAlive(true);
         this.redissonClient = Redisson.create(config);
-
-
-        RTopic topic = this.redissonClient.getTopic(topicStr);
-        topic.addListener(LogMessage.class, new Listener());
     }
 
-    /**
-     * 监听者
-     */
-    class Listener implements MessageListener<LogMessage> {
-        // 监听者监听到消息，打印
-        @Override
-        public void onMessage(CharSequence charSequence, LogMessage logMessage) {
-            logger.info("接收消息：{}", JSON.toJSONString(logMessage));
-        }
-    }
+
 
     /**
      * 推送消息

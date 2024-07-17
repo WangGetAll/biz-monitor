@@ -9,6 +9,8 @@ public class Constants {
 
     public static class RedisKey {
 
+        public static String monitor_node_data_count_key = "monitor_node_data_key_";
     }
+
 
 }
